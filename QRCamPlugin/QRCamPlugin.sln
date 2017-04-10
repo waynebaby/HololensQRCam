@@ -1,0 +1,67 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26403.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "WebCamPhotoService.Share", "WebCamPhotoService.Share\WebCamPhotoService.Share.shproj", "{FF0DAD8B-EFE5-4E44-9743-0A4893F5E4AC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebCamPhotoService.Editor", "WebCamPhotoService.Editor\WebCamPhotoService.Editor.csproj", "{FD5489B6-93D9-425F-A50B-A558DF79743C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebCamPhotoService.UWP", "WebCamPhotoService.UWP\WebCamPhotoService.UWP.csproj", "{5A5D5C74-724C-4A6D-8ECD-90AE7B9B9CBE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Files", "Files", "{FE6B602F-2A80-4E44-A28A-993BDD1AE206}"
+EndProject
+Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		WebCamPhotoService.Share\WebCamPhotoService.Share.projitems*{5a5d5c74-724c-4a6d-8ecd-90ae7b9b9cbe}*SharedItemsImports = 4
+		WebCamPhotoService.Share\WebCamPhotoService.Share.projitems*{fd5489b6-93d9-425f-a50b-a558df79743c}*SharedItemsImports = 4
+		WebCamPhotoService.Share\WebCamPhotoService.Share.projitems*{ff0dad8b-efe5-4e44-9743-0a4893f5e4ac}*SharedItemsImports = 13
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|ARM = Debug|ARM
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|ARM = Release|ARM
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FD5489B6-93D9-425F-A50B-A558DF79743C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD5489B6-93D9-425F-A50B-A558DF79743C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD5489B6-93D9-425F-A50B-A558DF79743C}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{FD5489B6-93D9-425F-A50B-A558DF79743C}.Debug|ARM.Build.0 = Debug|Any CPU
+		{FD5489B6-93D9-425F-A50B-A558DF79743C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{FD5489B6-93D9-425F-A50B-A558DF79743C}.Debug|x64.Build.0 = Debug|Any CPU
+		{FD5489B6-93D9-425F-A50B-A558DF79743C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FD5489B6-93D9-425F-A50B-A558DF79743C}.Debug|x86.Build.0 = Debug|Any CPU
+		{FD5489B6-93D9-425F-A50B-A558DF79743C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD5489B6-93D9-425F-A50B-A558DF79743C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD5489B6-93D9-425F-A50B-A558DF79743C}.Release|ARM.ActiveCfg = Release|Any CPU
+		{FD5489B6-93D9-425F-A50B-A558DF79743C}.Release|ARM.Build.0 = Release|Any CPU
+		{FD5489B6-93D9-425F-A50B-A558DF79743C}.Release|x64.ActiveCfg = Release|Any CPU
+		{FD5489B6-93D9-425F-A50B-A558DF79743C}.Release|x64.Build.0 = Release|Any CPU
+		{FD5489B6-93D9-425F-A50B-A558DF79743C}.Release|x86.ActiveCfg = Release|Any CPU
+		{FD5489B6-93D9-425F-A50B-A558DF79743C}.Release|x86.Build.0 = Release|Any CPU
+		{5A5D5C74-724C-4A6D-8ECD-90AE7B9B9CBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A5D5C74-724C-4A6D-8ECD-90AE7B9B9CBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A5D5C74-724C-4A6D-8ECD-90AE7B9B9CBE}.Debug|ARM.ActiveCfg = Debug|ARM
+		{5A5D5C74-724C-4A6D-8ECD-90AE7B9B9CBE}.Debug|ARM.Build.0 = Debug|ARM
+		{5A5D5C74-724C-4A6D-8ECD-90AE7B9B9CBE}.Debug|x64.ActiveCfg = Debug|x64
+		{5A5D5C74-724C-4A6D-8ECD-90AE7B9B9CBE}.Debug|x64.Build.0 = Debug|x64
+		{5A5D5C74-724C-4A6D-8ECD-90AE7B9B9CBE}.Debug|x86.ActiveCfg = Debug|x86
+		{5A5D5C74-724C-4A6D-8ECD-90AE7B9B9CBE}.Debug|x86.Build.0 = Debug|x86
+		{5A5D5C74-724C-4A6D-8ECD-90AE7B9B9CBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A5D5C74-724C-4A6D-8ECD-90AE7B9B9CBE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A5D5C74-724C-4A6D-8ECD-90AE7B9B9CBE}.Release|ARM.ActiveCfg = Release|ARM
+		{5A5D5C74-724C-4A6D-8ECD-90AE7B9B9CBE}.Release|ARM.Build.0 = Release|ARM
+		{5A5D5C74-724C-4A6D-8ECD-90AE7B9B9CBE}.Release|x64.ActiveCfg = Release|x64
+		{5A5D5C74-724C-4A6D-8ECD-90AE7B9B9CBE}.Release|x64.Build.0 = Release|x64
+		{5A5D5C74-724C-4A6D-8ECD-90AE7B9B9CBE}.Release|x86.ActiveCfg = Release|x86
+		{5A5D5C74-724C-4A6D-8ECD-90AE7B9B9CBE}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
