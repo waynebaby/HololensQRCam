@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebCamPhotoService.UWP", "W
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Files", "Files", "{FE6B602F-2A80-4E44-A28A-993BDD1AE206}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebCamPhotoService.UWP.TestApp", "WebCamPhotoService.UWP.TestApp\WebCamPhotoService.UWP.TestApp.csproj", "{B6F5588B-F48F-4652-AECC-2E2D9F724058}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		WebCamPhotoService.Share\WebCamPhotoService.Share.projitems*{5a5d5c74-724c-4a6d-8ecd-90ae7b9b9cbe}*SharedItemsImports = 4
@@ -60,6 +62,26 @@ Global
 		{5A5D5C74-724C-4A6D-8ECD-90AE7B9B9CBE}.Release|x64.Build.0 = Release|x64
 		{5A5D5C74-724C-4A6D-8ECD-90AE7B9B9CBE}.Release|x86.ActiveCfg = Release|x86
 		{5A5D5C74-724C-4A6D-8ECD-90AE7B9B9CBE}.Release|x86.Build.0 = Release|x86
+		{B6F5588B-F48F-4652-AECC-2E2D9F724058}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{B6F5588B-F48F-4652-AECC-2E2D9F724058}.Debug|ARM.ActiveCfg = Debug|ARM
+		{B6F5588B-F48F-4652-AECC-2E2D9F724058}.Debug|ARM.Build.0 = Debug|ARM
+		{B6F5588B-F48F-4652-AECC-2E2D9F724058}.Debug|ARM.Deploy.0 = Debug|ARM
+		{B6F5588B-F48F-4652-AECC-2E2D9F724058}.Debug|x64.ActiveCfg = Debug|x64
+		{B6F5588B-F48F-4652-AECC-2E2D9F724058}.Debug|x64.Build.0 = Debug|x64
+		{B6F5588B-F48F-4652-AECC-2E2D9F724058}.Debug|x64.Deploy.0 = Debug|x64
+		{B6F5588B-F48F-4652-AECC-2E2D9F724058}.Debug|x86.ActiveCfg = Debug|x86
+		{B6F5588B-F48F-4652-AECC-2E2D9F724058}.Debug|x86.Build.0 = Debug|x86
+		{B6F5588B-F48F-4652-AECC-2E2D9F724058}.Debug|x86.Deploy.0 = Debug|x86
+		{B6F5588B-F48F-4652-AECC-2E2D9F724058}.Release|Any CPU.ActiveCfg = Release|x86
+		{B6F5588B-F48F-4652-AECC-2E2D9F724058}.Release|ARM.ActiveCfg = Release|ARM
+		{B6F5588B-F48F-4652-AECC-2E2D9F724058}.Release|ARM.Build.0 = Release|ARM
+		{B6F5588B-F48F-4652-AECC-2E2D9F724058}.Release|ARM.Deploy.0 = Release|ARM
+		{B6F5588B-F48F-4652-AECC-2E2D9F724058}.Release|x64.ActiveCfg = Release|x64
+		{B6F5588B-F48F-4652-AECC-2E2D9F724058}.Release|x64.Build.0 = Release|x64
+		{B6F5588B-F48F-4652-AECC-2E2D9F724058}.Release|x64.Deploy.0 = Release|x64
+		{B6F5588B-F48F-4652-AECC-2E2D9F724058}.Release|x86.ActiveCfg = Release|x86
+		{B6F5588B-F48F-4652-AECC-2E2D9F724058}.Release|x86.Build.0 = Release|x86
+		{B6F5588B-F48F-4652-AECC-2E2D9F724058}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -5,10 +5,16 @@ using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Diagnostics;
 using System.Linq;
+using System.IO;
 #if WINDOWS_UWP
+using Windows.UI.Xaml.Media.Imaging;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml;
+using Windows.Media;
+using Windows.Graphics.Imaging;
+using Windows.Media.MediaProperties;
 using Windows.Devices.Enumeration;
 using Windows.Media.Capture;
-
 #endif
 namespace WebCamPhotoService
 {
@@ -22,6 +28,11 @@ namespace WebCamPhotoService
 
 
 
+        // Information about the camera device
+        private bool _mirroringPreview = false;
+        private bool _externalCamera = false;
+        private int _photoWidth = 0;
+        private int _photoHeight = 0;
 
         private bool _isInitialized = false;
         private bool _isPreviewing = false;
@@ -58,10 +69,6 @@ namespace WebCamPhotoService
         // MediaCapture and its state variables
         private MediaCapture _mediaCapture;
 
-        // Information about the camera device
-        private bool _mirroringPreview = false;
-        private bool _externalCamera = false;
-
         /// <summary>
         /// Initializes the MediaCapture, registers events, gets camera device information for mirroring and rotating, and starts preview
         /// </summary>
@@ -93,33 +100,10 @@ namespace WebCamPhotoService
                 //try
                 //{
                 await _mediaCapture.InitializeAsync(settings);
+
+
                 IsInitialized = true;
-                //}
-                //catch (UnauthorizedAccessException)
-                //{
-                //    Debug.WriteLine("The app was denied access to the camera");
-                //}
 
-                // If initialization succeeded, start the preview
-                //if (_isInitialized)
-                //{
-                // Figure out where the camera is located
-                if (cameraDevice.EnclosureLocation == null || cameraDevice.EnclosureLocation.Panel == Windows.Devices.Enumeration.Panel.Unknown)
-                {
-                    // No information on the location of the camera, assume it's an external camera, not integrated on the device
-                    _externalCamera = true;
-                }
-                else
-                {
-                    // Camera is fixed on the device
-                    _externalCamera = false;
-
-                    // Only mirror the preview if the camera is on the front panel
-                    _mirroringPreview = (cameraDevice.EnclosureLocation.Panel == Windows.Devices.Enumeration.Panel.Front);
-                }
-
-                await StartPreviewAsync();
-                //}
             }
         }
 
@@ -132,59 +116,12 @@ namespace WebCamPhotoService
             IsFailed = true;
             //TODO: Inform Exception;
         }
-        /// <summary>
-        /// Stops the preview and deactivates a display request, to allow the screen to go into power saving modes, and locks the UI
-        /// </summary>
-        /// <returns></returns>
-        private async Task StopPreviewAsync()
-        {
-            IsPreviewing = false;
-            await _mediaCapture.StopPreviewAsync();
-            //TODO: Inform stopped.
 
-
-            // Use the dispatcher because this method is sometimes called from non-UI threads
-            //await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-            //{
-            //    PreviewControl.Source = null;
-
-            //    // Allow the device to sleep now that the preview is stopped
-            //    _displayRequest.RequestRelease();
-
-            //    GetPreviewFrameButton.IsEnabled = _isPreviewing;
-            //});
-        }
         /// <summary>
         /// Starts the preview and adjusts it for for rotation and mirroring after making a request to keep the screen on and unlocks the UI
         /// </summary>
         /// <returns></returns>
-        private async Task StartPreviewAsync()
-        {
-            Debug.WriteLine("StartPreviewAsync");
 
-            // Prevent the device from sleeping while the preview is running
-            //_displayRequest.RequestActive();
-
-            //// Register to listen for media property changes
-            //_systemMediaControls.PropertyChanged += SystemMediaControls_PropertyChanged;
-
-            //// Set the preview source in the UI and mirror it if necessary
-            //PreviewControl.Source = _mediaCapture;
-            //PreviewControl.FlowDirection = _mirroringPreview ? FlowDirection.RightToLeft : FlowDirection.LeftToRight;
-
-            // Start the preview
-            await _mediaCapture.StartPreviewAsync();
-            IsPreviewing = true;
-
-            //// Initialize the preview to the current orientation
-            //if (_isPreviewing)
-            //{
-            //    await SetPreviewRotationAsync();
-            //}
-
-            //// Enable / disable the button depending on the preview state
-            //GetPreviewFrameButton.IsEnabled = _isPreviewing;
-        }
         public async Task CleanupAsync()
         {
             if (IsInitialized)
@@ -194,7 +131,8 @@ namespace WebCamPhotoService
                     // The call to stop the preview is included here for completeness, but can be
                     // safely removed if a call to MediaCapture.Dispose() is being made later,
                     // as the preview will be automatically stopped at that point
-                    await StopPreviewAsync();
+                    //await StopPreviewAsync();
+                    this._mediaCapture.Dispose();
                 }
 
                 IsInitialized = false;
@@ -227,6 +165,79 @@ namespace WebCamPhotoService
             // If there is no device mounted on the desired panel, return the first device found
             return desiredDevice ?? allVideoDevices.FirstOrDefault();
         }
+
+        /// <summary>
+        /// Gets the current preview frame as a SoftwareBitmap, displays its properties in a TextBlock, and can optionally display the image
+        /// in the UI and/or save it to disk as a jpg
+        /// </summary>
+        /// <returns></returns>
+        public async Task<MemoryStream> GetPhotoStreamAsync()
+        {
+            // Get information about the preview
+            var previewProperties = _mediaCapture.VideoDeviceController.GetMediaStreamProperties(MediaStreamType.VideoPreview) as VideoEncodingProperties;
+            PhotoWidth = (int)previewProperties.Width;
+            PhotoHeight = (int)previewProperties.Height;
+            // Create the video frame to request a SoftwareBitmap preview frame
+
+            var ms = new Windows.Storage.Streams.InMemoryRandomAccessStream();
+            // Capture the preview frame
+            await _mediaCapture.CapturePhotoToStreamAsync(
+                         new ImageEncodingProperties
+                         {
+                             Height = (uint)PhotoHeight,
+                             Width = (uint)PhotoWidth,
+                             Subtype = "PNG"
+                         },
+                        ms);
+            {
+                // Collect the resulting frame
+                //SoftwareBitmap previewFrame = new SoftwareBitmap(BitmapPixelFormat.Bgra8, PhotoWidth, PhotoHeight);
+
+                // this is a PNG file so we need to decode it to raw pixel data.
+                var bitmapDecoder = await BitmapDecoder.CreateAsync(ms);
+
+                // grab the pixels in a byte[] array.
+                var pixelProvider = await bitmapDecoder.GetPixelDataAsync();
+                var bits = pixelProvider.DetachPixelData();
+                var stm = new MemoryStream(bits);
+                // Show the frame information
+                //FrameInfoTextBlock.Text = String.Format("{0}x{1} {2}", previewFrame.PixelWidth, previewFrame.PixelHeight, previewFrame.BitmapPixelFormat);
+
+                // Add a simple green filter effect to the SoftwareBitmap
+                //if (GreenEffectCheckBox.IsChecked == true)
+                //{
+                //    ApplyGreenFilter(previewFrame);
+                //}y
+
+                // Show the frame (as is, no rotation is being applied)
+                //if (ShowFrameCheckBox.IsChecked == true)
+                //{
+                // Create a SoftwareBitmapSource to display the SoftwareBitmap to the user
+                //var sbSource = new SoftwareBitmapSource();
+                //await sbSource.SetBitmapAsync(previewFrame);
+
+                //    // Display it in the Image control
+                //    PreviewFrameImage.Source = sbSource;
+                //}
+                //var stm = await SaveSoftwareBitmapAsync(previewFrame);
+                return stm;
+            }
+        }
+
+        private static async Task<MemoryStream> SaveSoftwareBitmapAsync(SoftwareBitmap bitmap)
+        {
+            var rs = new Windows.Storage.Streams.InMemoryRandomAccessStream();
+            var bf = new Windows.Storage.Streams.Buffer(2u << 16);
+            bitmap.CopyToBuffer(bf);
+            //var encoder = await BitmapEncoder.CreateAsync(BitmapEncoder.BmpEncoderId, rs);
+            await rs.WriteAsync(bf);
+
+            var ms = new MemoryStream();
+            await rs.GetInputStreamAt(0).AsStreamForRead().CopyToAsync(ms);
+            ms.Position = 0;
+            return ms;
+        }
+
 #else
 
         public Task InitializeAsync()
@@ -254,6 +265,11 @@ namespace WebCamPhotoService
         {
 
         }
+        public Task<MemoryStream> GetPhotoStreamAsync()
+        {
+            return Task.Factory.StartNew(() => new MemoryStream() );
+        }
+
 
 #endif
 
@@ -277,6 +293,10 @@ namespace WebCamPhotoService
         public bool IsPreviewing { get => _isPreviewing; private set => _isPreviewing = value; }
         public bool IsFailed { get => _isFailed; private set => _isFailed = value; }
         public bool IsDisposed { get => _isDisposed; private set => _isDisposed = value; }
+        public bool ExternalCamera { get => _externalCamera; private set => _externalCamera = value; }
+        public bool MirroringPreview { get => _mirroringPreview; private set => _mirroringPreview = value; }
+        public int PhotoWidth { get => _photoWidth; private set => _photoWidth = value; }
+        public int PhotoHeight { get => _photoHeight; private set => _photoHeight = value; }
 
         public event EventHandler<PhotoServiceStateChangedEventArg> StateChanged;
         private void RaiseItemChangedEvents()
