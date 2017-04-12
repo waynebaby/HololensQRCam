@@ -3,7 +3,7 @@
         <UnityInstallationDir>C:\Program Files\Unity\Editor\</UnityInstallationDir>
         <UnityWSASolutionName>QRCamUnity</UnityWSASolutionName>
         <UnityWSASolutionDir>D:\GitHub\HololensQRCam\output\</UnityWSASolutionDir>
-        <UnityWSAPlayerDir>C:\Program Files\Unity\Editor\Data\PlaybackEngines\MetroSupport\</UnityWSAPlayerDir>
+        <UnityWSAPlayerDir>$(UnityWSASolutionDir)</UnityWSAPlayerDir>
         <UnityWSAToolsDir>$(UnityWSASolutionDir)Unity\Tools\</UnityWSAToolsDir>
         <UnityProjectDir>D:\GitHub\HololensQRCam\QRCamUnity\</UnityProjectDir>
     </PropertyGroup>

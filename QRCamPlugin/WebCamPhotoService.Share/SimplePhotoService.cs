@@ -18,7 +18,7 @@ using Windows.Media.Capture;
 #endif
 namespace WebCamPhotoService
 {
-    public class SimplePhotoService : IDisposable, ISimplePhotoService
+    public class SimplePhotoService : IDisposable, IPhotoService
     {
 
         public SimplePhotoService()
@@ -348,29 +348,5 @@ namespace WebCamPhotoService
 
 
     }
-
-    public class PhotoServiceStateChangedEventArg : EventArgs
-    {
-        private bool _isInitialized;
-        private bool _isPreviewing;
-        private bool _isFailed;
-        private bool _isDisposed;
-
-        public PhotoServiceStateChangedEventArg(SimplePhotoService service)
-        {
-
-            IsInitialized = service.IsInitialized;
-            IsPreviewing = service.IsPreviewing;
-            IsFailed = service.IsFailed;
-            IsDisposed = service.IsDisposed;
-        }
-
-
-        public bool IsInitialized { get => _isInitialized; private set => _isInitialized = value; }
-        public bool IsPreviewing { get => _isPreviewing; private set => _isPreviewing = value; }
-        public bool IsFailed { get => _isFailed; private set => _isFailed = value; }
-        public bool IsDisposed { get => _isDisposed; private set => _isDisposed = value; }
-
-
-    }
+    
 }

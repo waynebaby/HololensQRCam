@@ -12,6 +12,7 @@
             <RowDefinition></RowDefinition>
             <RowDefinition Height="32"></RowDefinition>
         </Grid.RowDefinitions>
+        <CaptureElement Name="Capature"></CaptureElement>
         <Border BorderThickness="2" BorderBrush="Black">
             <Image Name="Image" />
         </Border>

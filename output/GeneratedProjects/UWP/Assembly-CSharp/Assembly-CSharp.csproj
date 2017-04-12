@@ -5,7 +5,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{cd56585b-deff-4fc5-87e9-053fb60a46b6}</ProjectGuid>
+    <ProjectGuid>{763BF290-F8F2-47B4-B8D0-6407E55BCA05}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>AssemblyCSharpWSA</RootNamespace>
@@ -131,7 +131,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="D:\GitHub\HololensQRCam\output\GeneratedProjects\UWP\Assembly-CSharp-firstpass\Assembly-CSharp-firstpass.csproj">
-      <Project>{dee93f6c-7938-4a9b-ad54-b8c58502e266}</Project>
+      <Project>{64dd031e-a03c-4151-9669-f92873a318e3}</Project>
       <Name>Assembly-CSharp-firstpass</Name>
     </ProjectReference>
     <Reference Include="UnityEngine">
@@ -166,10 +166,10 @@
       <HintPath>$(UnityWSASolutionDir)$(UnityWSASolutionName)\Unprocessed\WebCamPhotoService.UWP.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <SDKReference Include="WindowsDesktop, Version=10.0.15063.0"/>
-    <SDKReference Include="WindowsIoT, Version=10.0.15063.0"/>
-    <SDKReference Include="WindowsMobile, Version=10.0.15063.0"/>
-    <SDKReference Include="WindowsTeam, Version=10.0.15063.0"/>
+    <SDKReference Include="WindowsDesktop, Version=10.0.15063.0" />
+    <SDKReference Include="WindowsIoT, Version=10.0.15063.0" />
+    <SDKReference Include="WindowsMobile, Version=10.0.15063.0" />
+    <SDKReference Include="WindowsTeam, Version=10.0.15063.0" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="$(UnityProjectDir)Assets\**\*.cs" Exclude="$(UnityProjectDir)Assets\**\Editor\**\*.cs;$(UnityProjectDir)Assets\Plugins\**\*.cs;$(UnityProjectDir)Assets\Standard Assets\**\*.cs;$(UnityProjectDir)Assets\Standard Assets (Mobile)\**\*.cs;$(UnityProjectDir)Assets\Pro Standard Assets\**\*.cs">
@@ -180,13 +180,13 @@
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
-    <PropertyGroup>
+  <PropertyGroup>
     <TargetsTriggeredByCompilation>$(TargetsTriggeredByCompilation);RunSerializationWeaver</TargetsTriggeredByCompilation>
   </PropertyGroup>
   <Target Name="RunSerializationWeaver" Condition="'$(BuildingProject)' == 'true'">
     <Message Importance="high" Text="Running SerializationWeaver..." />
     <Move SourceFiles="@(IntermediateAssembly)" DestinationFolder="$(TargetDir)Unprocessed" OverwriteReadOnlyFiles="true" />
-    <Move SourceFiles="@(IntermediateAssembly-&gt;'%(RelativeDir)%(Filename).pdb')" DestinationFolder="$(TargetDir)Unprocessed" Condition="Exists('@(IntermediateAssembly-&gt;'%(RelativeDir)%(Filename).pdb')')" OverwriteReadOnlyFiles="true" />
+    <Move SourceFiles="@(IntermediateAssembly->'%(RelativeDir)%(Filename).pdb')" DestinationFolder="$(TargetDir)Unprocessed" Condition="Exists('@(IntermediateAssembly->'%(RelativeDir)%(Filename).pdb')')" OverwriteReadOnlyFiles="true" />
     <Exec Command="&quot;$(UnityWSAToolsDir)SerializationWeaver\SerializationWeaver.exe&quot; &quot;$(TargetDir)Unprocessed\$(TargetFileName)&quot; -pdb -verbose -unity-engine=&quot;$(UnityWSASolutionDir)$(UnityWSASolutionName)\Unprocessed\UnityEngine.dll&quot; -unity-networking=&quot;$(UnityWSASolutionDir)$(UnityWSASolutionName)\Unprocessed\UnityEngine.Networking.dll&quot; -additionalAssemblyPath=&quot;$(UnityWSASolutionDir)GeneratedProjects\UWP\Assembly-CSharp-firstpass\bin\$(PlatformName)\$(ConfigurationName)&quot; &quot;$([System.IO.Path]::GetFullPath('$(IntermediateOutputPath)').TrimEnd('\'))&quot;" />
     <Message Importance="high" Text="SerializationWeaver done." />
   </Target>

@@ -79,14 +79,11 @@
     <Reference Include="Task.Editor">
       <HintPath>Assets\Plugins\Task.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="WebCamPhotoService.Editor">
+      <HintPath>Assets\Plugins\WebCamPhotoService.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="zxing.unity">
       <HintPath>Assets\Plugins\ZXing\zxing.unity.dll</HintPath>
-    </Reference>
-    <Reference Include="WebCamPhotoService.Editor">
-      <HintPath>Assets\Plugins\WebCamPhotoService.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="WebCamPhotoService.Editor">
-      <HintPath>Assets\Plugins\WebCamPhotoService.Editor.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -361,6 +358,7 @@
     <Compile Include="Assets\Scripts\QRReader\QRCodeReader.cs" />
     <Compile Include="Assets\Scripts\QRReader\QRPhotoTaker.cs" />
     <Compile Include="Assets\Scripts\QRReader\QRPhotoTakerUWP.cs" />
+    <Compile Include="Assets\Scripts\QRReader\QRPhotoTakerXAML.cs" />
     <Compile Include="Assets\Scripts\QRReader\QRResultManager.cs" />
   </ItemGroup>
   <ItemGroup>

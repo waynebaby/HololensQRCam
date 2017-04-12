@@ -5,7 +5,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{dee93f6c-7938-4a9b-ad54-b8c58502e266}</ProjectGuid>
+    <ProjectGuid>{622B2BB6-575D-4897-BE17-B217F5D58233}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>AssemblyCSharpWSA</RootNamespace>
@@ -130,7 +130,6 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
-
     <Reference Include="UnityEngine">
       <HintPath>$(UnityWSASolutionDir)$(UnityWSASolutionName)\Unprocessed\UnityEngine.dll</HintPath>
       <Private>False</Private>
@@ -163,10 +162,10 @@
       <HintPath>$(UnityWSASolutionDir)$(UnityWSASolutionName)\Unprocessed\WebCamPhotoService.UWP.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <SDKReference Include="WindowsDesktop, Version=10.0.15063.0"/>
-    <SDKReference Include="WindowsIoT, Version=10.0.15063.0"/>
-    <SDKReference Include="WindowsMobile, Version=10.0.15063.0"/>
-    <SDKReference Include="WindowsTeam, Version=10.0.15063.0"/>
+    <SDKReference Include="WindowsDesktop, Version=10.0.15063.0" />
+    <SDKReference Include="WindowsIoT, Version=10.0.15063.0" />
+    <SDKReference Include="WindowsMobile, Version=10.0.15063.0" />
+    <SDKReference Include="WindowsTeam, Version=10.0.15063.0" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="$(UnityProjectDir)Assets\Plugins\**\*.cs" Exclude="$(UnityProjectDir)Assets\Plugins\**\Editor\**\*.cs">
@@ -186,13 +185,13 @@
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
-    <PropertyGroup>
+  <PropertyGroup>
     <TargetsTriggeredByCompilation>$(TargetsTriggeredByCompilation);RunSerializationWeaver</TargetsTriggeredByCompilation>
   </PropertyGroup>
   <Target Name="RunSerializationWeaver" Condition="'$(BuildingProject)' == 'true'">
     <Message Importance="high" Text="Running SerializationWeaver..." />
     <Move SourceFiles="@(IntermediateAssembly)" DestinationFolder="$(TargetDir)Unprocessed" OverwriteReadOnlyFiles="true" />
-    <Move SourceFiles="@(IntermediateAssembly-&gt;'%(RelativeDir)%(Filename).pdb')" DestinationFolder="$(TargetDir)Unprocessed" Condition="Exists('@(IntermediateAssembly-&gt;'%(RelativeDir)%(Filename).pdb')')" OverwriteReadOnlyFiles="true" />
+    <Move SourceFiles="@(IntermediateAssembly->'%(RelativeDir)%(Filename).pdb')" DestinationFolder="$(TargetDir)Unprocessed" Condition="Exists('@(IntermediateAssembly->'%(RelativeDir)%(Filename).pdb')')" OverwriteReadOnlyFiles="true" />
     <Exec Command="&quot;$(UnityWSAToolsDir)SerializationWeaver\SerializationWeaver.exe&quot; &quot;$(TargetDir)Unprocessed\$(TargetFileName)&quot; -pdb -verbose -unity-engine=&quot;$(UnityWSASolutionDir)$(UnityWSASolutionName)\Unprocessed\UnityEngine.dll&quot; -unity-networking=&quot;$(UnityWSASolutionDir)$(UnityWSASolutionName)\Unprocessed\UnityEngine.Networking.dll&quot;  &quot;$([System.IO.Path]::GetFullPath('$(IntermediateOutputPath)').TrimEnd('\'))&quot;" />
     <Message Importance="high" Text="SerializationWeaver done." />
   </Target>

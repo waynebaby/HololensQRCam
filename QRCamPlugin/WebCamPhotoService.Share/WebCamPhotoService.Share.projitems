@@ -9,7 +9,8 @@
     <Import_RootNamespace>WebCamPhotoService.Share</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)ISimplePhotoService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IPhotoService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)XamlControlPhotoService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SimplePhotoService.cs" />
   </ItemGroup>
 </Project>

@@ -1,0 +1,11 @@
+﻿<Application
+    x:Class="QRCamUnity.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:QRCamUnity"
+    xmlns:xHost="using:WebCamPhotoService.UWP">
+    <Application.Resources >
+   
+
+    </Application.Resources>
+</Application>

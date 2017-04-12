@@ -152,7 +152,17 @@
     </SDKReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App.cs">
+    <ApplicationDefinition Include="App.xaml">
+    </ApplicationDefinition>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Page Include="MainPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Content Include="Resource.res">
     </Content>
@@ -217,12 +227,12 @@
       <Name>WebCamPhotoService.UWP</Name>
     </ProjectReference>
     <ProjectReference Include="D:\GitHub\HololensQRCam\output\GeneratedProjects\UWP\Assembly-CSharp\Assembly-CSharp.csproj">
-      <Project>{cd56585b-deff-4fc5-87e9-053fb60a46b6}</Project>
+      <Project>{763bf290-f8f2-47b4-b8d0-6407e55bca05}</Project>
       <Name>Assembly-CSharp</Name>
       <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="D:\GitHub\HololensQRCam\output\GeneratedProjects\UWP\Assembly-CSharp-firstpass\Assembly-CSharp-firstpass.csproj">
-      <Project>{dee93f6c-7938-4a9b-ad54-b8c58502e266}</Project>
+      <Project>{622b2bb6-575d-4897-be17-b217f5d58233}</Project>
       <Name>Assembly-CSharp-firstpass</Name>
       <Private>False</Private>
     </ProjectReference>

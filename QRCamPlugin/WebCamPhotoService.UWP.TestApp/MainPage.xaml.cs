@@ -44,12 +44,16 @@ namespace WebCamPhotoService.UWP.TestApp
 
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
-            using (var sps=new SimplePhotoService())
+            using (var sps=new XamlControlPhotoService())
             {
+                sps.SetCaptureElement(Capature);
                 await sps.InitializeAsync();
                 var photo=await sps.GetPhotoStreamAsync();
                 var bms = new BitmapImage();
-                await bms.SetSourceAsync(photo.AsRandomAccessStream());
+                var ra = new Windows.Storage.Streams.InMemoryRandomAccessStream();
+                await photo.CopyToAsync(ra.AsStreamForWrite());
+                
+                await bms.SetSourceAsync(ra);
                 Image.Source = bms;
                 await sps.CleanupAsync();
             }
